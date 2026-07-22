@@ -25,7 +25,12 @@ CAN_CONFIG = cfg["can"]
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 BACKBONE_TYPE = CAN_CONFIG["backbone_type"]
 PRETRAINED_BACKBONE = True if CAN_CONFIG["pretrained_backbone"] == 1 else False
-CHECKPOINT_PATH = f'checkpoints/{results}_can_best.pth' if not PRETRAINED_BACKBONE else f'checkpoints/p_{results}_can_best.pth'
+
+CHECKPOINT_PATH = (
+    f'checkpoints/{BACKBONE_TYPE}_can_best.pth'
+    if not PRETRAINED_BACKBONE
+    else f'checkpoints/p_{BACKBONE_TYPE}_can_best.pth'
+)
 
 # Modified process_img to accept numpy array and validate shapes
 def process_img(image, convert_to_rgb=False):
